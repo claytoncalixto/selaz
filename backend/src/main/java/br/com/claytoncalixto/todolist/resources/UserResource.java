@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.claytoncalixto.todolist.dto.TaskDTO;
-import br.com.claytoncalixto.todolist.services.TaskService;
+import br.com.claytoncalixto.todolist.entities.User;
+import br.com.claytoncalixto.todolist.services.UserService;
 
 @RestController
-@RequestMapping(value = "/tasks")
-public class TaskResource {
+@RequestMapping(value = "/users")
+public class UserResource {
 
 	@Autowired
-	private TaskService taskService;
+	private UserService userService;
 
 	@GetMapping
-	public ResponseEntity<List<TaskDTO>> findAll() {
-		List<TaskDTO> list = taskService.findAll();
+	public ResponseEntity<List<User>> findAll() {
+		List<User> list = userService.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
