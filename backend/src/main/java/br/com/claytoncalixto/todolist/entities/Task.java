@@ -3,29 +3,52 @@ package br.com.claytoncalixto.todolist.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tb_task")
 public class Task implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name = "title")
 	private String title;
+	
+	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "createdAT")
 	private Date createdAT;
+	
+	@Column(name = "dueDate")
 	private Date dueDate;
+	
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	private Status status;
-	private User user;
 	
 	public Task() {
 	}
 	
-	public Task(Long id, String title, String description, Date createdAT, Date dueDate, Status status, User user) {
+	public Task(Long id, String title, String description, Date createdAT, Date dueDate, Status status) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.createdAT = createdAT;
 		this.dueDate = dueDate;
 		this.status = status;
-		this.user = user;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -73,15 +96,7 @@ public class Task implements Serializable {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -106,5 +121,5 @@ public class Task implements Serializable {
 			return false;
 		return true;
 	}	
-	
+
 }
