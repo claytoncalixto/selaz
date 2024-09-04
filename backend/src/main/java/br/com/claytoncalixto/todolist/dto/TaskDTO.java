@@ -3,8 +3,8 @@ package br.com.claytoncalixto.todolist.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import br.com.claytoncalixto.todolist.entities.Status;
 import br.com.claytoncalixto.todolist.entities.Task;
+import br.com.claytoncalixto.todolist.enums.Status;
 
 public class TaskDTO implements Serializable {
 	private static final long serialVersionUID = 1L; 

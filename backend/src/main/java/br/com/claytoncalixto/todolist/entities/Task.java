@@ -3,10 +3,9 @@ package br.com.claytoncalixto.todolist.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.com.claytoncalixto.todolist.enums.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,9 +32,7 @@ public class Task implements Serializable {
 	@Column(name = "dueDate", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Date dueDate;
 	
-	@Column(name = "status")
-	@Enumerated(EnumType.STRING)
-	private Status status;
+	private Integer status;
 	
 	public Task() {
 	}
@@ -46,7 +43,7 @@ public class Task implements Serializable {
 		this.description = description;
 		this.createdAT = createdAT;
 		this.dueDate = dueDate;
-		this.status = status;
+		setStatus(status);
 	}
 	
 	public Long getId() {
@@ -88,15 +85,17 @@ public class Task implements Serializable {
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
-
+	
 	public Status getStatus() {
-		return status;
+		return Status.valueOf(status);
 	}
 
 	public void setStatus(Status status) {
-		this.status = status;
+		if(status != null) {
+		   this.status = status.getCode();	
+		}
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
