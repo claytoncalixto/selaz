@@ -1,9 +1,9 @@
 package br.com.claytoncalixto.todolist.services.exceptions;
 
-public class ResourceNotFounException extends RuntimeException {
+public class DatabaseException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
-	public ResourceNotFounException(String msg) {
+	public DatabaseException(String msg) {
 		super(msg);
 	}
 }

@@ -5,13 +5,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.claytoncalixto.todolist.dto.TaskDTO;
 import br.com.claytoncalixto.todolist.entities.Task;
 import br.com.claytoncalixto.todolist.repositories.TaskRepository;
-import br.com.claytoncalixto.todolist.services.exceptions.ResourceNotFounException;
+import br.com.claytoncalixto.todolist.services.exceptions.DatabaseException;
+import br.com.claytoncalixto.todolist.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
@@ -29,7 +32,7 @@ public class TaskService {
 	@Transactional(readOnly = true)
 	public TaskDTO findById(Long id) {
 		Optional<Task> obj = taskRepository.findById(id);
-		Task entity = obj.orElseThrow(() -> new ResourceNotFounException("Entity not found"));
+		Task entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new TaskDTO(entity);
 	}
 
@@ -57,7 +60,20 @@ public class TaskService {
 			entity = taskRepository.save(entity);
 			return new TaskDTO(entity);
 		}catch (EntityNotFoundException e) {
-			throw new ResourceNotFounException("Id not found:"+ id); 
+			throw new ResourceNotFoundException("Id not found:"+ id); 
 		}
+	}
+
+	public void delete(Long id) {
+		try {
+		taskRepository.deleteById(id);
+		}
+		catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id not found:" + id); 
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DatabaseException("Integrety violation");
+		}
+		
 	}
 }

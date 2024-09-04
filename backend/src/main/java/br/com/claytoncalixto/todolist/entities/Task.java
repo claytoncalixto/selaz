@@ -24,13 +24,13 @@ public class Task implements Serializable {
 	@Column(name = "title")
 	private String title;
 	
-	@Column(name = "description")
+	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 	
-	@Column(name = "createdAT")
+	@Column(name = "createdAT", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Date createdAT;
 	
-	@Column(name = "dueDate")
+	@Column(name = "dueDate", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Date dueDate;
 	
 	@Column(name = "status")

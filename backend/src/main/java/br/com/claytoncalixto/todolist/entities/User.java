@@ -1,11 +1,16 @@
 package br.com.claytoncalixto.todolist.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +25,12 @@ public class User implements Serializable{
 	private String username;
 	
 	private String nivel;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_user_task", 
+	   joinColumns = @JoinColumn(name = "user_id"),
+	   inverseJoinColumns = @JoinColumn(name = "task_id"))
+	Set<Task>tasks = new HashSet<>();
 	
 	public User() {
 	}
@@ -52,6 +63,14 @@ public class User implements Serializable{
 
 	public void setNivel(String nivel) {
 		this.nivel = nivel;
+	}
+	
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
+	
+	public Set<Task> getTasks() {
+		return tasks;
 	}
 
 	@Override
