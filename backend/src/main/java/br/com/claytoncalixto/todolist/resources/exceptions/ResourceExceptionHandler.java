@@ -7,14 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.claytoncalixto.todolist.services.exceptions.EntityNotFounException;
+import br.com.claytoncalixto.todolist.services.exceptions.ResourceNotFounException;
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
 	
-	@ExceptionHandler(EntityNotFounException.class)
-	public ResponseEntity<StandardError> entityNotFound(EntityNotFounException e, HttpServletRequest request) {
+	@ExceptionHandler(ResourceNotFounException.class)
+	public ResponseEntity<StandardError> entityNotFound(ResourceNotFounException e, HttpServletRequest request) {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(HttpStatus.NOT_FOUND.value());

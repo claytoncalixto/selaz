@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.claytoncalixto.todolist.dto.TaskDTO;
 import br.com.claytoncalixto.todolist.entities.Task;
 import br.com.claytoncalixto.todolist.repositories.TaskRepository;
-import br.com.claytoncalixto.todolist.services.exceptions.EntityNotFounException;
+import br.com.claytoncalixto.todolist.services.exceptions.ResourceNotFounException;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class TaskService {
@@ -28,7 +29,7 @@ public class TaskService {
 	@Transactional(readOnly = true)
 	public TaskDTO findById(Long id) {
 		Optional<Task> obj = taskRepository.findById(id);
-		Task entity = obj.orElseThrow(() -> new EntityNotFounException("Entity not found"));
+		Task entity = obj.orElseThrow(() -> new ResourceNotFounException("Entity not found"));
 		return new TaskDTO(entity);
 	}
 
@@ -44,4 +45,19 @@ public class TaskService {
 		return new TaskDTO(entity);
 	}
 
+	@Transactional
+	public TaskDTO update(Long id, TaskDTO dto) {
+		try {
+			Task entity = taskRepository.getReferenceById(id);
+			entity.setCreatedAT(dto.getCreatedAT());
+			entity.setDueDate(dto.getDueDate());
+			entity.setDescription(dto.getDescription());
+			entity.setStatus(dto.getStatus());
+			entity.setTitle(dto.getTitle());
+			entity = taskRepository.save(entity);
+			return new TaskDTO(entity);
+		}catch (EntityNotFoundException e) {
+			throw new ResourceNotFounException("Id not found:"+ id); 
+		}
+	}
 }
