@@ -32,4 +32,16 @@ public class TaskService {
 		return new TaskDTO(entity);
 	}
 
+	@Transactional
+	public TaskDTO insert(TaskDTO dto) {
+		Task entity = new Task();
+		entity.setCreatedAT(dto.getCreatedAT());
+		entity.setDueDate(dto.getDueDate());
+		entity.setDescription(dto.getDescription());
+		entity.setStatus(dto.getStatus());
+		entity.setTitle(dto.getTitle());
+		entity = taskRepository.save(entity);
+		return new TaskDTO(entity);
+	}
+
 }
