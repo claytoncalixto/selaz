@@ -82,50 +82,15 @@ Acessar o link do projeto no GitHub:(https://github.com/claytoncalixto/selaz)
    
 
 
-## Requisitos Técnicos
+## Requisitos técnicos aplicados neste projeto
 
 - Java 11 ou superior
 - Spring Boot
 - Banco de Dados Relacional (H2 para facilitar os teste)
 - JPA/Hibernate
 - Maven
-- Spring Security
+- Spring Security(desabilitado)
 - Spring Data JPA
-- JUnit e Mockito para testes
 
-## Instruções para Implementação
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/ManagerThalles/backend-java-spring-test.git
-   cd backend-java-spring-boot-test
-2. Siga as instruções no arquivo `requirements.md` para detalhes sobre a implementação.
 
-## Configuração Automática
-
-Para facilitar a configuração do ambiente, você pode usar o script `setup.sh` incluído no repositório. 
-
-### Passos para Configuração
-
-1. Clone o repositório:
-    ```bash
-    git clone https://github.com/ManagerThalles/backend-java-spring-test.git
-    cd backend-java-spring-boot-test
-    ```
-
-2. Dê permissão de execução ao script:
-    ```bash
-    chmod +x setup.sh
-    ```
-
-3. Execute o script:
-    ```bash
-    ./setup.sh
-    ```
-
-O script irá verificar se você tem Java 11 e Maven instalados, instalar as dependências do Maven e iniciar a aplicação Spring Boot.
-
-## Envio do Projeto
-O candidato deve enviar o link do repositório (GitHub) contendo o código-fonte do projeto, junto com um arquivo README.md explicando como configurar e executar a aplicação.
-
-Boa sorte!
