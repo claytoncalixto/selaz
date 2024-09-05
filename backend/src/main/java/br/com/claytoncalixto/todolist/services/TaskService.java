@@ -76,4 +76,16 @@ public class TaskService {
 		}
 		
 	}
+	
+	@Transactional(readOnly = true)
+	public List<TaskDTO> findListTaskByStatus(Long statusCode) {
+		List<Task> list = taskRepository.listTaskByStatus(statusCode);		
+		return list.stream().map(x -> new TaskDTO()).collect(Collectors.toList());
+	}
+	
+	@Transactional(readOnly = true)
+	public List<TaskDTO> findListTaskByDueDate(Long statusCode) {
+		List<Task> list = taskRepository.listTaskByDueDate(statusCode);		
+		return list.stream().map(x -> new TaskDTO()).collect(Collectors.toList());
+	}
 }

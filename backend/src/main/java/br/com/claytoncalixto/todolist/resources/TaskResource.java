@@ -56,4 +56,16 @@ public class TaskResource {
 		taskService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping(value = "?status={statusCode}")
+	public ResponseEntity<List<TaskDTO>> listStatusTask(@PathVariable Long statusCode){
+		List<TaskDTO> codeStatus = taskService.findListTaskByStatus(statusCode);
+		return ResponseEntity.ok().body(codeStatus);
+	}
+	
+	@GetMapping(value = "?sort=dueDate")
+	public ResponseEntity<List<TaskDTO>> listStatusDueDate(@PathVariable Long statusCode){
+		List<TaskDTO> codeStatus = taskService.findListTaskByDueDate(statusCode);
+		return ResponseEntity.ok().body(codeStatus);
+	}
 }

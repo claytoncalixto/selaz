@@ -2,6 +2,7 @@ package br.com.claytoncalixto.todolist.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -69,6 +70,12 @@ public class UserService {
 			throw new DatabaseException("Integrety violation");
 		}
 		
+	}
+	
+	@Transactional(readOnly = true)
+	public List<UserDTO> findListAllTasksByUser(Long userCode) {
+		List<User> list = userRepository.listAllTasksByUser(userCode);		
+		return list.stream().map(x -> new UserDTO()).collect(Collectors.toList());
 	}
 
 }
