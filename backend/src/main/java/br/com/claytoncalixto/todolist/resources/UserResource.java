@@ -58,7 +58,7 @@ public class UserResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping(value = "/{userId}/tasks")
+	@GetMapping(value = "/{userCode}/tasks")
 	public ResponseEntity<List<UserDTO>> listAllTasksByUser(@PathVariable Long userCode){
 		List<UserDTO> codeUser = userService.findListAllTasksByUser(userCode);
 		return ResponseEntity.ok().body(codeUser);
